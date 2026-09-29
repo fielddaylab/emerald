@@ -8,6 +8,3 @@
 [submodule "Submodules/Leaf"]
 	path = Submodules/Leaf
 	url = https://github.com/BeauPrime/Leaf.git
-[submodule "Assets/WebGLTemplates/FB/FloatingDropdown"]
-	path = Assets/WebGLTemplates/FB/FloatingDropdown
-	url = https://github.com/fielddaylab/FloatingDropdown.git
