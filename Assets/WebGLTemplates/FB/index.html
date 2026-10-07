@@ -46,8 +46,17 @@
     }
     gtag("js", new Date());
 
+    // The Vault player passes the site that sent the player here (PBS Wisconsin Education's "Play the game") as
+    // ?vault_src=; inside the player the game's own referrer is the Vault page, so report the passed source instead.
+    var vaultSrc = null;
+    try {
+      vaultSrc = new URL(location.href).searchParams.get("vault_src") || new URL(location.href).searchParams.get("vault_referrer");
+      if (vaultSrc && !/^https:\/\/[a-z0-9.-]+\//i.test(vaultSrc)) vaultSrc = null;
+    } catch (e) {}
+
     gtag("config", "G-70RRTWTVBE", {
       cookie_flags: "max-age=7200;secure;samesite=none",
+      ...(vaultSrc ? { page_referrer: vaultSrc } : {}),
     });
   </script>
 
@@ -70,6 +79,7 @@
     const analytics = firebase.analytics();
     gtag("config", "G-70RRTWTVBE", {
       cookie_flags: "max-age=7200;secure;samesite=none",
+      ...(vaultSrc ? { page_referrer: vaultSrc } : {}),
     });
   </script>
   <script src="https://cdn.brainpop.com/games/assets/js/cameraProxyDOMCrossDomain.js"></script>
